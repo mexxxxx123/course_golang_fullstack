@@ -1,21 +1,34 @@
 package main
 
 import (
-	"log"
 	"mexxx1/golang-fullstack/config"
 	"mexxx1/golang-fullstack/internal/home"
+	"mexxx1/golang-fullstack/pkg/logger"
 
+	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 func main() {
+
+	// Configs
+
 	config.Init()
-	dbConf := config.NewDataBaseConfig()
-	log.Println(dbConf)
+	logConf := config.NewLogConfig()
+	logger := logger.NewLogger(logConf)
 
-	app := fiber.New()
+	// App
 
-	home.NewHandler(app)
+	app := fiber.New(fiber.Config{
+		// Views: engine,
+	})
+	app.Use(fiberzerolog.New(fiberzerolog.Config{
+		Logger: logger,
+	}))
+	app.Use(recover.New())
+
+	home.NewHandler(app, logger)
 
 	app.Listen(":3001")
 }
