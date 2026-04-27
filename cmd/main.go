@@ -20,9 +20,7 @@ func main() {
 
 	// App
 
-	app := fiber.New(fiber.Config{
-		// Views: engine,
-	})
+	app := fiber.New()
 	app.Use(fiberzerolog.New(fiberzerolog.Config{
 		Logger: logger,
 	}))
