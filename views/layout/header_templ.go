@@ -11,6 +11,10 @@ import templruntime "github.com/a-h/templ/runtime"
 func headerClass() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background`, "#222222")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`display`, "flex")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`gap`, "12px")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`flex-direction`, "column")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`align-items`, "center")))
 	templ_7745c5c3_CSSID := templ.CSSID(`headerClass`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
@@ -58,6 +62,10 @@ func Header() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = Menu().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

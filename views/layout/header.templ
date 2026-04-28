@@ -2,10 +2,15 @@ package layout
 
 css headerClass() {
 	background: { "#222222" };
+	display: { "flex" };
+	gap: { "12px" };
+	flex-direction: { "column" };
+	align-items: { "center" };
 }
 
 templ Header() {
 	<div class={ headerClass() }>
+		@Menu()
 		{ children... }
 	</div>
 }
