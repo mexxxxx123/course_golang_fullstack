@@ -4,10 +4,15 @@ import "mexxx1/golang-fullstack/views/components"
 import "mexxx1/golang-fullstack/views/layout"
 
 templ Main() {
-	<main>
-		@layout.Header() {
-			@components.Title("Найди работу своей мечты!")
-			@components.SubTitle("Простой поиск работы")
-		}
-	</main>
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Найди работу мечты",
+		MetaDescription: "Сайт по поиску работы мечты",
+	}) {
+		<main>
+			@layout.Header() {
+				@components.Title("Найди работу своей мечты!")
+				@components.SubTitle("Простой поиск работы")
+			}
+		</main>
+	}
 }

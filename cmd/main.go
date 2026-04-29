@@ -25,6 +25,7 @@ func main() {
 		Logger: logger,
 	}))
 	app.Use(recover.New())
+	app.Static("/static", "./public")
 
 	home.NewHandler(app, logger)
 
