@@ -1,11 +1,17 @@
 package layout
 
+import "mexxx1/golang-fullstack/views/components"
+
 templ Menu() {
 	@MenuStyle()
 	<div class="menu">
-		<div class="menu__logo">Лого</div>
+		<div class="menu__left">
+			<img src="./public/pictures/check.png"/>
+			<div class="menu__left-text">Моя работа</div>
+		</div>
 		<div class="menu__right">
 			<div class="menu__right-link">Войти</div>
+			@components.Button("Зарегистрироваться")
 		</div>
 	</div>
 }
@@ -15,13 +21,21 @@ templ MenuStyle() {
         .menu{
             display: flex;
             justify-content: space-between;
-            padding: 20px 0;
+            padding: 20px 70px;
         }  
+        .menu__left{
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            cursor:pointer ;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
         .menu__right{
             display: flex;
             gap: 12px;
-        }
-        .menu__right{
+            align-items: center;
             cursor:pointer ;
             text-decoration: none;
             color: white;

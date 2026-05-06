@@ -1,3 +1,14 @@
+:root {
+    --font-family: "Open Sans", sans-serif;
+}
+
 body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+h1,
+h2 {
     margin: 0;
 }

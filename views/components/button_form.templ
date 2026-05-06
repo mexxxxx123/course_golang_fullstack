@@ -1,0 +1,27 @@
+
+package components
+
+templ ButtonForm(text string) {
+	@ButtonFormStyle()
+	<button class="buttonForm">{ text }</button>
+}
+
+templ ButtonFormStyle() {
+	<style>
+        
+.buttonForm{
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 120%;
+	text-align: center;
+	font-style: normal;
+	background: none;
+	border: none;
+	padding:  28px;
+	cursor: pointer;
+	color: #fff;
+	background: #309689;
+	border-radius: 20px;
+}
+    </style>
+}

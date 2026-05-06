@@ -1,0 +1,26 @@
+package components
+
+templ Button(text string) {
+	@ButtonStyle()
+	<button class="button">{ text }</button>
+}
+
+templ ButtonStyle() {
+	<style>
+        
+.button{
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 120%;
+	text-align: center;
+	font-style: normal;
+	background: none;
+	border: none;
+	padding: 14px 20px;
+	cursor: pointer;
+	color: #fff;
+	background: #309689;
+	border-radius: 8px;
+}
+    </style>
+}

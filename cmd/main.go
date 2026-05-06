@@ -19,13 +19,12 @@ func main() {
 	logger := logger.NewLogger(logConf)
 
 	// App
-
 	app := fiber.New()
 	app.Use(fiberzerolog.New(fiberzerolog.Config{
 		Logger: logger,
 	}))
 	app.Use(recover.New())
-	app.Static("/static", "./public")
+	app.Static("/public", "./public")
 
 	home.NewHandler(app, logger)
 

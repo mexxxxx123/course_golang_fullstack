@@ -1,14 +1,20 @@
 
 package components
 
-css SubTitleClass() {
-	font-weight: { "400" };
-	font-size: { "18px" };
-	color: { "#bababa" };
+templ SubTitle(text string) {
+	@SubTitleStyle()
+	<a class="subtitle">
+		{ text }
+	</a>
 }
 
-templ SubTitle(title string) {
-	<a class={ SubTitleClass() }>
-		{ title }
-	</a>
+templ SubTitleStyle() {
+	<style>
+      .subtitle{
+		display: block;
+		font-weight: 400;
+		color: #bababa;
+		text-align: center;
+      }  
+    </style>
 }

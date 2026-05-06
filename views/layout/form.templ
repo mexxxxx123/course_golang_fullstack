@@ -1,0 +1,72 @@
+package layout
+
+import "mexxx1/golang-fullstack/views/components"
+
+templ Form() {
+	@FormStyle()
+	<div class="form">
+		<div class="form__titles">
+			@components.Title1("Опубликовать вакансию")
+			@components.SubTitle("Введите все необходимые данные для публикации")
+		</div>
+		<div class="inputs">
+			@components.Input(components.InputData{
+				Name:        "role",
+				Placeholder: "Должность",
+			})
+			@components.Input(components.InputData{
+				Name:        "company",
+				Placeholder: "Сфера Компании",
+			})
+			@components.Input(components.InputData{
+				Name:        "Location",
+				Placeholder: "Расположение",
+			})
+			@components.Input(components.InputData{
+				Name:        "nameCompany",
+				Placeholder: "Название компании",
+			})
+			@components.Input(components.InputData{
+				Name:        "Zp",
+				Placeholder: "Заработная плата",
+			})
+			@components.Input(components.InputData{
+				Name:        "email",
+				Placeholder: "Контактный email",
+			})
+		</div>
+		@components.ButtonForm("Опубликовать вакансию")
+	</div>
+}
+
+templ FormStyle() {
+	<style>
+		.form__titles{
+			display: flex;
+			flex-direction: column;
+			gap: 40px;
+			margin-bottom: 60px;
+
+		}
+       .form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        background: rgba(48, 150, 137, 0.1);;
+
+		padding: 60px 0 120px 0;
+
+       }    
+	   .inputs{
+		display: grid;
+		grid-template-columns: repeat(2 , 435px);
+		row-gap: 30px;
+		column-gap: 24px;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 30px;
+		
+	   }
+        
+    </style>
+}

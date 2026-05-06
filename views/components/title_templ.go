@@ -14,7 +14,7 @@ func TitleClass() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`font-size`, "70px")))
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`line-height`, "114%")))
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`color`, "#fff")))
-	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`margin`, "0")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`text-align`, "center")))
 	templ_7745c5c3_CSSID := templ.CSSID(`TitleClass`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
