@@ -3,6 +3,7 @@ package main
 import (
 	"mexxx1/golang-fullstack/config"
 	"mexxx1/golang-fullstack/internal/home"
+	vacancyform "mexxx1/golang-fullstack/internal/vacancy"
 	"mexxx1/golang-fullstack/pkg/logger"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -27,6 +28,7 @@ func main() {
 	app.Static("/public", "./public")
 
 	home.NewHandler(app, logger)
+	vacancyform.NewHandler(app, logger)
 
 	app.Listen(":3001")
 }

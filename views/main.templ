@@ -2,8 +2,10 @@ package views
 
 import "mexxx1/golang-fullstack/views/components"
 import "mexxx1/golang-fullstack/views/layout"
+import "mexxx1/golang-fullstack/widgets"
 
 templ Main() {
+	@MainStyle()
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Найди работу мечты",
 		MetaDescription: "Сайт по поиску работы мечты",
@@ -13,8 +15,15 @@ templ Main() {
 				@components.Title("Найди работу своей мечты !")
 				@components.SubTitle("Простой поиск работы")
 			}
-			Main
-			@layout.Form()
+			@widgets.VacancyForm()
 		</main>
 	}
+}
+
+templ MainStyle() {
+	<style>
+	.body{
+		box-sizing: border-box;
+	}				
+	</style>
 }
