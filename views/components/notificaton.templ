@@ -23,6 +23,7 @@ templ NotificationStyle() {
         padding: 30px;
         color: white;
         font-size: 16px;
+        white-space: pre-line;
     }
 
     .notification__fail{
@@ -31,6 +32,10 @@ templ NotificationStyle() {
 
     .notification__success{
         background-color: #309689;
+    }
+    .htmx-swapping  .notification{
+        opacity: 0;
+        transition: 0.15s ease-out; 
     }
 </style>
 }

@@ -35,7 +35,7 @@ func VacancyForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyForm\"><div class=\"VacancyForm_wrapper\"><div id=\"vacancy-result\"></div><form hx-post=\"/vacancy\" hx-trigger=\"submit\" hx-target=\"#vacancy-result\" hx-swap=\"innerHTML\"><div class=\"VacancyForm__titles\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyForm\"><div class=\"VacancyForm_wrapper\"><div id=\"vacancy-result\"></div><form hx-post=\"/vacancy\" hx-trigger=\"submit\" hx-target=\"#vacancy-result\" hx-swap=\"innerHTML swap:1s\"><div class=\"VacancyForm__titles\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -59,27 +59,27 @@ func VacancyForm() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = components.Input(components.InputData{
-			Name:        "company",
+			Name:        "company-type",
 			Placeholder: "Сфера Компании"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = components.Input(components.InputData{
-			Name:        "Location",
+			Name:        "location",
 			Placeholder: "Расположение",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = components.Input(components.InputData{
-			Name:        "nameCompany",
+			Name:        "company-name",
 			Placeholder: "Название компании",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = components.Input(components.InputData{
-			Name:        "Zp",
+			Name:        "salary",
 			Placeholder: "Заработная плата",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -92,7 +92,7 @@ func VacancyForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><div class=\"VacancyForm-button\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -100,7 +100,7 @@ func VacancyForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</form></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<span class=\"VacancyForm-loader\"></span></div></form></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -129,7 +129,7 @@ func VacancyFormStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n\t\t.VacancyForm{\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tpadding: 60px 0 120px 0;\n\t\t    background: rgba(48, 150, 137, 0.1);;\n\t\t}\n       .VacancyForm_wrapper{\n\t\t\tmax-width:894px ;\n\t\t\twidth: 100%;\n       }    \n\n\t\t.VacancyForm__titles{\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tgap: 40px;\n\t\t\tmargin-bottom: 60px;\n\t\t}\n\n       .VacancyForm_wrapper form{ width: 100%; display: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tflex-direction: column;\n       }    \n\t   #vacancy-result{\n\t\t\twidth: 100%;\n\t   }\n\n\n\n\t   .VacancyForm__inputs{\n\t\t\twidth: 100%;\n\t\t\tdisplay: grid;\n\t\t\tgrid-template-columns: repeat(2 , 1fr);\n\t\t\trow-gap: 30px;\n\t\t\tcolumn-gap: 24px;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmargin-bottom: 30px;\n\t\t\n\t   }\n        \n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n\t\t.VacancyForm{\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tpadding: 60px 0 120px 0;\n\t\t    background: rgba(48, 150, 137, 0.1);;\n\t\t}\n       .VacancyForm_wrapper{\n\t\t\tmax-width:894px ;\n\t\t\twidth: 100%;\n       }    \n\n\t\t.VacancyForm__titles{\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tgap: 40px;\n\t\t\tmargin-bottom: 60px;\n\t\t}\n\n       .VacancyForm_wrapper form{ width: 100%; display: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tflex-direction: column;\n       }    \n\t   #vacancy-result{\n\t\t\twidth: 100%;\n\t   }\n\t   \n  .htmx-request   .VacancyForm-button {\n\t\tdisplay: none;\n\t}\n\n\t.htmx-request .VacancyForm-loader{\n    \twidth: 48px;\n\t    height: 48px;\n\t    border: 5px solid #FFF;\n\t    border-bottom-color: #FF3D00;\n \t   border-radius: 50%;\n \t   display: inline-block;\n \t   box-sizing: border-box;\n \t   animation: rotation 1s linear infinite;\n    }\n\n    @keyframes rotation {\n    0% {\n        transform: rotate(0deg);\n    }\n    100% {\n        transform: rotate(360deg);\n    }\n    } \n\n\n\t   .VacancyForm__inputs{\n\t\t\twidth: 100%;\n\t\t\tdisplay: grid;\n\t\t\tgrid-template-columns: repeat(2 , 1fr);\n\t\t\trow-gap: 30px;\n\t\t\tcolumn-gap: 24px;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmargin-bottom: 30px;\n\t\t\n\t   }\n        \n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

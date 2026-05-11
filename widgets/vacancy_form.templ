@@ -7,7 +7,7 @@ templ VacancyForm() {
 	<div class="VacancyForm">
 		<div class="VacancyForm_wrapper">
 			<div id="vacancy-result"></div>
-			<form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result" hx-swap="innerHTML">
+			<form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result" hx-swap="innerHTML swap:1s">
 				<div class="VacancyForm__titles">
 					@components.Title1("Опубликовать вакансию")
 					@components.SubTitle("Введите все необходимые данные для публикации")
@@ -18,18 +18,18 @@ templ VacancyForm() {
 						Placeholder: "Должность",
 					})
 					@components.Input(components.InputData{
-						Name:        "company",
+						Name:        "company-type",
 						Placeholder: "Сфера Компании"})
 					@components.Input(components.InputData{
-						Name:        "Location",
+						Name:        "location",
 						Placeholder: "Расположение",
 					})
 					@components.Input(components.InputData{
-						Name:        "nameCompany",
+						Name:        "company-name",
 						Placeholder: "Название компании",
 					})
 					@components.Input(components.InputData{
-						Name:        "Zp",
+						Name:        "salary",
 						Placeholder: "Заработная плата",
 					})
 					@components.Input(components.InputData{
@@ -37,7 +37,10 @@ templ VacancyForm() {
 						Placeholder: "Контактный email",
 					})
 				</div>
-				@components.ButtonForm("Опубликовать вакансию")
+				<div class="VacancyForm-button">
+					@components.ButtonForm("Опубликовать вакансию")
+					<span class="VacancyForm-loader"></span>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -71,7 +74,30 @@ templ VacancyFormStyle() {
 	   #vacancy-result{
 			width: 100%;
 	   }
+	   
+  .htmx-request   .VacancyForm-button {
+		display: none;
+	}
 
+	.htmx-request .VacancyForm-loader{
+    	width: 48px;
+	    height: 48px;
+	    border: 5px solid #FFF;
+	    border-bottom-color: #FF3D00;
+ 	   border-radius: 50%;
+ 	   display: inline-block;
+ 	   box-sizing: border-box;
+ 	   animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
 
 
 	   .VacancyForm__inputs{

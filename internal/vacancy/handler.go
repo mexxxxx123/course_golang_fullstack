@@ -1,8 +1,8 @@
 package vacancy
 
 import (
-	"fmt"
 	"mexxx1/golang-fullstack/pkg/logger/tadapter"
+	"mexxx1/golang-fullstack/validator"
 	"mexxx1/golang-fullstack/views/components"
 
 	"github.com/a-h/templ"
@@ -28,25 +28,49 @@ func NewHandler(router fiber.Router, logger *zerolog.Logger) {
 
 func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
 	form := VacancyCreateForm{
-		Email: c.FormValue("email"),
+		Role:        c.FormValue("role"),
+		CompanyType: c.FormValue("company-type"),
+		Location:    c.FormValue("location"),
+		CompanyName: c.FormValue("company-name"),
+		Salary:      c.FormValue("salary"),
+		Email:       c.FormValue("email"),
 	}
 	errors := validate.Validate(
+		&validators.StringIsPresent{
+			Name:    "Role",
+			Field:   form.Role,
+			Message: "Не задана Должность",
+		},
+		&validators.StringIsPresent{
+			Name:    "CompanyType",
+			Field:   form.CompanyType,
+			Message: "Не задана Сфера компании",
+		},
+		&validators.StringIsPresent{
+			Name:    "Location",
+			Field:   form.Location,
+			Message: "Не задано Местоположение",
+		},
+		&validators.StringIsPresent{
+			Name:    "CompanyName",
+			Field:   form.CompanyName,
+			Message: "Не задано Название компании",
+		},
+		&validators.StringIsPresent{
+			Name:    "Salary",
+			Field:   form.Salary,
+			Message: "Не задана Заработная плата",
+		},
 		&validators.EmailIsPresent{
 			Name:    "Email",
 			Field:   form.Email,
-			Message: "Email не задан или неверный",
+			Message: "Не задан или введен неверно Email",
 		},
 	)
-	h.logger.Info().Msg(form.Email)
 	var component templ.Component
 	if len(errors.Errors) > 0 {
-		component = components.Notification("Ошибки", components.NotificationFail)
+		component = components.Notification((validator.PrintErrors(*errors)), components.NotificationFail)
 		return tadapter.Render(c, component)
-	}
-	for key, value := range errors.Errors {
-
-		h.logger.Info().Msg(form.Email)
-		fmt.Println(key, value)
 	}
 	component = components.Notification("Вакансия создана", components.NotificationSuccess)
 	return tadapter.Render(c, component)

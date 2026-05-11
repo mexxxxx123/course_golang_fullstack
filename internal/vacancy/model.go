@@ -1,5 +1,10 @@
 package vacancy
 
 type VacancyCreateForm struct {
-	Email string
+	Role        string
+	Location    string
+	Salary      string
+	CompanyType string
+	CompanyName string
+	Email       string
 }
