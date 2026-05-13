@@ -3,7 +3,7 @@ package main
 import (
 	"mexxx1/golang-fullstack/config"
 	"mexxx1/golang-fullstack/internal/home"
-	vacancyform "mexxx1/golang-fullstack/internal/vacancy"
+	"mexxx1/golang-fullstack/internal/vacancy"
 	"mexxx1/golang-fullstack/pkg/logger"
 	"mexxx1/golang-fullstack/pkg/logger/database"
 
@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	// Configs
+	// Config`s
 
 	config.Init()
 	logConf := config.NewLogConfig()
@@ -29,11 +29,19 @@ func main() {
 	app.Use(recover.New())
 	app.Static("/public", "./public")
 
+	//DbPool
+
 	dbpool := database.CreateDbPool(dbConf, logger)
 	defer dbpool.Close()
 
+	//Repo`s
+
+	VacancyRepo := vacancy.NewVacancyRepository(dbpool, logger)
+
+	//Handler`s
+
 	home.NewHandler(app, logger)
-	vacancyform.NewHandler(app, logger)
+	vacancy.NewHandler(app, logger, VacancyRepo)
 
 	app.Listen(":3001")
 }

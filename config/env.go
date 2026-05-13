@@ -28,7 +28,6 @@ type DatabaseConfig struct {
 func NewDataBaseConfig() *DatabaseConfig {
 	return &DatabaseConfig{
 		Url: getEnvString("DATABASE_URL", ""),
-		// url: getEnvInt("DATABASE_URL"),
 	}
 }
 
