@@ -3,6 +3,7 @@ package home
 import (
 	"mexxx1/golang-fullstack/pkg/logger/tadapter"
 	"mexxx1/golang-fullstack/views"
+	"net/http"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog"
@@ -34,5 +35,5 @@ func (h *HomeHandler) error(c *fiber.Ctx) error {
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
 	component := views.Main()
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, http.StatusOK)
 }

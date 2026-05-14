@@ -4,6 +4,7 @@ import (
 	"mexxx1/golang-fullstack/pkg/logger/tadapter"
 	"mexxx1/golang-fullstack/validator"
 	"mexxx1/golang-fullstack/views/components"
+	"net/http"
 
 	"github.com/a-h/templ"
 	"github.com/gobuffalo/validate"
@@ -72,15 +73,16 @@ func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
 	var component templ.Component
 	if len(errors.Errors) > 0 {
 		component = components.Notification((validator.PrintErrors(*errors)), components.NotificationFail)
-		return tadapter.Render(c, component)
+		return tadapter.Render(c, component, http.StatusBadRequest)
 	}
 
 	err := h.repo.AddVacancy(form)
 	if err != nil {
 		h.logger.Error().Msg(err.Error())
 		component = components.Notification("Ошибка на сервере, попробуйте позднее", components.NotificationFail)
-		return tadapter.Render(c, component)
+		return tadapter.Render(c, component, http.StatusInternalServerError)
+
 	}
 	component = components.Notification("Вакансия создана", components.NotificationSuccess)
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, http.StatusOK)
 }
