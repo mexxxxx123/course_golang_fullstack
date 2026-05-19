@@ -12,8 +12,9 @@ templ VacancyForm() {
 				hx-trigger="submit"
 				hx-target="#vacancy-result"
 				hx-swap="innerHTML swap:1s"
-				hx-on:htmx:afterRequest="if(event.detail.successful) this.reset"
+				hx-on--before-request="alert('test')"
 			>
+				>
 				<div class="VacancyForm__titles">
 					@components.Title1("Опубликовать вакансию")
 					@components.SubTitle("Введите все необходимые данные для публикации")
