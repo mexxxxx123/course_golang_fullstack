@@ -5,16 +5,16 @@ import "mexxx1/golang-fullstack/views/components"
 templ VacancyForm() {
 	@VacancyFormStyle()
 	<div class="VacancyForm">
-		<div class="VacancyForm_wrapper">
+		<div class="VacancyForm_wrapper" hx-ext="response-targets">
 			<div id="vacancy-result"></div>
 			<form
 				hx-post="/vacancy"
 				hx-trigger="submit"
 				hx-target="#vacancy-result"
+				hx-target-error="#vacancy-result"
 				hx-swap="innerHTML swap:1s"
-				hx-on--before-request="alert('test')"
+				hx-on--after-request="if(event.detail.successful) this.reset()"
 			>
-				>
 				<div class="VacancyForm__titles">
 					@components.Title1("Опубликовать вакансию")
 					@components.SubTitle("Введите все необходимые данные для публикации")
@@ -26,7 +26,8 @@ templ VacancyForm() {
 					})
 					@components.Input(components.InputData{
 						Name:        "company-type",
-						Placeholder: "Сфера Компании"})
+						Placeholder: "Сфера Компании",
+					})
 					@components.Input(components.InputData{
 						Name:        "location",
 						Placeholder: "Расположение",

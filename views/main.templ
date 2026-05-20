@@ -2,7 +2,7 @@ package views
 
 import "mexxx1/golang-fullstack/views/components"
 import "mexxx1/golang-fullstack/views/layout"
-import "mexxx1/golang-fullstack/widgets"
+import "mexxx1/golang-fullstack/views/widgets"
 
 templ Main() {
 	@MainStyle()
@@ -16,6 +16,7 @@ templ Main() {
 				@components.SubTitle("Простой поиск работы")
 			}
 			@widgets.VacancyForm()
+			@widgets.VacancyCard()
 		</main>
 	}
 }

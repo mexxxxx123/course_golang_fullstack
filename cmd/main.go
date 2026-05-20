@@ -1,7 +1,9 @@
 package main
+
 import (
 	"mexxx1/golang-fullstack/config"
-	"mexxx1/golang-fullstack/internal/home" "mexxx1/golang-fullstack/internal/vacancy"
+	"mexxx1/golang-fullstack/internal/home"
+	"mexxx1/golang-fullstack/internal/vacancy"
 	"mexxx1/golang-fullstack/pkg/logger"
 	"mexxx1/golang-fullstack/pkg/logger/database"
 
@@ -24,7 +26,7 @@ func main() {
 	app.Use(fiberzerolog.New(fiberzerolog.Config{
 		Logger: logger,
 	}))
-	
+
 	app.Use(recover.New())
 	app.Static("/public", "./public")
 
@@ -32,7 +34,6 @@ func main() {
 
 	dbpool := database.CreateDbPool(dbConf, logger)
 	defer dbpool.Close()
-
 
 	//Repo`s
 

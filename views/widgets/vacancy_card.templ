@@ -1,0 +1,94 @@
+package widgets
+
+templ VacancyCard() {
+	@VacancyCardStyle()
+	<div class="VacancyCard">
+		<div class="VacancyCard__left">
+			<div class="VacancyCard__left-time">10 минут назад </div>
+			<div class="VacancyCard__left-hero">
+				<div class="VacancyCard__left-hero-logo">logo</div>
+				<div class="VacancyCard__left-hero-text">
+					<div class="VacancyCard__left-hero-header">Директор по продажам</div>
+					<div class="VacancyCard__left-hero-headling">ООО Василий</div>
+				</div>
+			</div>
+			<div class="VacancyCard__left-info">
+				<div class="VacancyCard__left-info-block">
+					<div class="VacancyCard__left-info-type-logo">logo</div>
+					<div class="VacancyCard__left-info-block-text">Медиа</div>
+				</div>
+				<div class="VacancyCard__left-info-block">
+					<div class="VacancyCard__left-info-salary-logo">logo</div>
+					<div class="VacancyCard__left-info-block-text">300 000 руб</div>
+				</div>
+				<div class="VacancyCard__left-info-block">
+					<div class="VacancyCard__left-info-location-logo">logo</div>
+					<div class="VacancyCard__left-info-block-text">Москва</div>
+				</div>
+			</div>
+		</div>
+		<div class="VacancyCard__right"></div>
+	</div>
+}
+
+templ VacancyCardStyle() {
+	<style>
+        .VacancyCard{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 3px 8px 0 rgba(48, 150, 137, 0.08);
+            background: #fff;
+            margin: 0 72px 24px 72px ;
+        } 
+        .VacancyCard__left{
+            display: flex;
+            flex-direction: column;
+        }
+        .VacancyCard__left-time{
+            background: rgba(48, 150, 137, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            width: 136px;
+            height: 28px;
+            font-size: 16px;
+            color: #309689;
+        }
+        .VacancyCard__left-hero{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        .VacancyCard__left-hero-text{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .VacancyCard__left-hero-header{
+          font-weight: 600;
+          font-size: 28px;
+          color: #000;  
+        }
+        .VacancyCard__left-hero-headling{
+          font-weight: 400;
+          font-size: 16px;
+          color: #000;
+        }
+        .VacancyCard__left-info{
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+        }
+        .VacancyCard__left-info-block{
+            display: flex;
+            gap: 12px;
+        }
+        .VacancyCard__left-info-block{
+            font-weight: 600;
+            font-size: 16px;
+            color: #6c757d;
+        }
+    </style>
+}

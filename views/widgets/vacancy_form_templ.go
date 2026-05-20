@@ -35,7 +35,7 @@ func VacancyForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyForm\"><div class=\"VacancyForm_wrapper\"><div id=\"vacancy-result\"></div><form hx-post=\"/vacancy\" hx-trigger=\"submit\" hx-target=\"#vacancy-result\" hx-swap=\"innerHTML swap:1s\"><div class=\"VacancyForm__titles\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyForm\"><div class=\"VacancyForm_wrapper\" hx-ext=\"response-targets\"><div id=\"vacancy-result\"></div><form hx-post=\"/vacancy\" hx-trigger=\"submit\" hx-target=\"#vacancy-result\" hx-target-error=\"#vacancy-result\" hx-swap=\"innerHTML swap:1s\" hx-on--after-request=\"if(event.detail.successful) this.reset()\"><div class=\"VacancyForm__titles\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -60,7 +60,8 @@ func VacancyForm() templ.Component {
 		}
 		templ_7745c5c3_Err = components.Input(components.InputData{
 			Name:        "company-type",
-			Placeholder: "Сфера Компании"}).Render(ctx, templ_7745c5c3_Buffer)
+			Placeholder: "Сфера Компании",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

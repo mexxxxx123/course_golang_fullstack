@@ -1,0 +1,2 @@
+ALTER TABLE vacancies
+ADD COLUMN createdAt timestamp DEFAULT CURRENT_TIMESTAMP;

@@ -5,6 +5,7 @@ import (
 	"mexxx1/golang-fullstack/validator"
 	"mexxx1/golang-fullstack/views/components"
 	"net/http"
+	"time"
 
 	"github.com/a-h/templ"
 	"github.com/gobuffalo/validate"
@@ -37,6 +38,7 @@ func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
 		CompanyName: c.FormValue("company-name"),
 		Salary:      c.FormValue("salary"),
 		Email:       c.FormValue("email"),
+		createdat:   time.Now(),
 	}
 	errors := validate.Validate(
 		&validators.StringIsPresent{
@@ -73,6 +75,11 @@ func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
 	var component templ.Component
 	if len(errors.Errors) > 0 {
 		component = components.Notification((validator.PrintErrors(*errors)), components.NotificationFail)
+		for key, value := range errors.Errors {
+			for value1 := range value {
+				h.logger.Error().Msg(errors.Errors[key][value1])
+			}
+		}
 		return tadapter.Render(c, component, http.StatusBadRequest)
 	}
 

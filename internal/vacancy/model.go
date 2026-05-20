@@ -1,5 +1,7 @@
 package vacancy
 
+import "time"
+
 type VacancyCreateForm struct {
 	Role        string
 	Location    string
@@ -7,4 +9,5 @@ type VacancyCreateForm struct {
 	CompanyType string
 	CompanyName string
 	Email       string
+	createdat   time.Time
 }
