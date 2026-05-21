@@ -28,6 +28,16 @@ func NewHandler(router fiber.Router, logger *zerolog.Logger, repo *VacancyReposi
 	}
 	vacGroup := router.Group("/vacancy")
 	vacGroup.Post("/", h.createVacancy)
+	vacGroup.Get("/", h.getAll)
+}
+func (h *VacancyFormHandler) getAll(c *fiber.Ctx) error {
+	vacancies, err := h.repo.getAll()
+	if err != nil {
+		h.logger.Error().Msg(err.Error())
+	}
+
+	return c.JSON(vacancies)
+
 }
 
 func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
@@ -38,7 +48,7 @@ func (h *VacancyFormHandler) createVacancy(c *fiber.Ctx) error {
 		CompanyName: c.FormValue("company-name"),
 		Salary:      c.FormValue("salary"),
 		Email:       c.FormValue("email"),
-		createdat:   time.Now(),
+		Createdat:   time.Now(),
 	}
 	errors := validate.Validate(
 		&validators.StringIsPresent{

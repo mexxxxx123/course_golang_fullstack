@@ -8,7 +8,21 @@ package widgets
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func VacancyCard() templ.Component {
+import "mexxx1/golang-fullstack/views/components"
+
+import "time"
+
+type VacancyCardProps struct {
+	Role        string
+	Location    string
+	Salary      string
+	CompanyType string
+	CompanyName string
+	Email       string
+	Createdat   time.Time
+}
+
+func VacancyCard(props VacancyCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -33,7 +47,93 @@ func VacancyCard() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyCard\"><div class=\"VacancyCard__left\"><div class=\"VacancyCard__left-time\">10 минут назад </div><div class=\"VacancyCard__left-hero\"><div class=\"VacancyCard__left-hero-logo\">logo</div><div class=\"VacancyCard__left-hero-text\"><div class=\"VacancyCard__left-hero-header\">Директор по продажам</div><div class=\"VacancyCard__left-hero-headling\">ООО Василий</div></div></div><div class=\"VacancyCard__left-info\"><div class=\"VacancyCard__left-info-block\"><div class=\"VacancyCard__left-info-type-logo\">logo</div><div class=\"VacancyCard__left-info-block-text\">Медиа</div></div><div class=\"VacancyCard__left-info-block\"><div class=\"VacancyCard__left-info-salary-logo\">logo</div><div class=\"VacancyCard__left-info-block-text\">300 000 руб</div></div><div class=\"VacancyCard__left-info-block\"><div class=\"VacancyCard__left-info-location-logo\">logo</div><div class=\"VacancyCard__left-info-block-text\">Москва</div></div></div></div><div class=\"VacancyCard__right\"></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"VacancyCard\"><div class=\"VacancyCard__left\"><div class=\"VacancyCard__left-time\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(props.Createdat.String())
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 21, Col: 65}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"VacancyCard__left-hero\"><img src=\"./public/pictures/vac_card_heroLogo.png\" width=\"40px\" height=\"40px\"><div class=\"VacancyCard__left-hero-text\"><div class=\"VacancyCard__left-hero-header\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(props.Role)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 25, Col: 60}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><div class=\"VacancyCard__left-hero-headling\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(props.CompanyName)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 26, Col: 69}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div></div><div class=\"VacancyCard__left-info\"><div class=\"VacancyCard__left-info-block\"><img src=\"./public/pictures/briefcase(2) 2.png\"><div class=\"VacancyCard__left-info-block-text\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(props.CompanyType)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 32, Col: 71}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div><div class=\"VacancyCard__left-info-block\"><img src=\"./public/pictures/g135.png\"><div class=\"VacancyCard__left-info-block-text\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(props.Salary)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 36, Col: 66}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div></div><div class=\"VacancyCard__left-info-block\"><img src=\"./public/pictures/map-pin.png\"><div class=\"VacancyCard__left-info-block-text\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(props.Location)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/vacancy_card.templ`, Line: 40, Col: 68}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div></div></div></div><div class=\"VacancyCard__right\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.Button("Откликнуться").Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -57,12 +157,12 @@ func VacancyCardStyle() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var2 == nil {
-			templ_7745c5c3_Var2 = templ.NopComponent
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<style>\n        .VacancyCard{\n            display: flex;\n            flex-direction: row;\n            justify-content: space-between;\n            padding: 40px;\n            border-radius: 20px;\n            box-shadow: 0 3px 8px 0 rgba(48, 150, 137, 0.08);\n            background: #fff;\n            margin: 0 72px 24px 72px ;\n        } \n        .VacancyCard__left{\n            display: flex;\n            flex-direction: column;\n        }\n        .VacancyCard__left-time{\n            background: rgba(48, 150, 137, 0.1);\n            border-radius: 8px;\n            padding: 8px;\n            width: 136px;\n            height: 28px;\n            font-size: 16px;\n            color: #309689;\n        }\n        .VacancyCard__left-hero{\n            display: flex;\n            flex-direction: row;\n            gap: 20px;\n        }\n        .VacancyCard__left-hero-text{\n            display: flex;\n            flex-direction: column;\n            gap: 20px;\n        }\n        .VacancyCard__left-hero-header{\n          font-weight: 600;\n          font-size: 28px;\n          color: #000;  \n        }\n        .VacancyCard__left-hero-headling{\n          font-weight: 400;\n          font-size: 16px;\n          color: #000;\n        }\n        .VacancyCard__left-info{\n            display: flex;\n            flex-direction: row;\n            gap: 24px;\n        }\n        .VacancyCard__left-info-block{\n            display: flex;\n            gap: 12px;\n        }\n        .VacancyCard__left-info-block{\n            font-weight: 600;\n            font-size: 16px;\n            color: #6c757d;\n        }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<style>\n        .VacancyCard{\n            display: flex;\n            flex-direction: row;\n            justify-content: space-between;\n            padding: 40px;\n            border-radius: 20px;\n            box-shadow: 0 3px 8px 0 rgba(48, 150, 137, 0.08);\n            background: #fff;\n            margin: 0 72px 24px 72px ;\n            align-items: center;\n        } \n        .VacancyCard__left{\n            display: flex;\n            flex-direction: column;\n        }\n        .VacancyCard__left-time{\n            width: fit-content;\n            background: rgba(48, 150, 137, 0.1);\n            border-radius: 8px;\n            padding: 8px;\n            font-size: 16px;\n            color: #309689;\n            margin-bottom: 24px;\n        }\n        .VacancyCard__left-hero{\n            display: flex;\n            flex-direction: row;\n            gap: 20px;\n            align-items: center;\n        }\n        .VacancyCard__left-hero-text{\n            display: flex;\n            flex-direction: column;\n            gap: 5px;\n        }\n        .VacancyCard__left-hero-header{\n          font-weight: 600;\n          font-size: 28px;\n          color: #000;  \n        }\n        .VacancyCard__left-hero-headling{\n          font-weight: 400;\n          font-size: 16px;\n          color: #000;\n        }\n        .VacancyCard__left-info{\n            margin-top: 28px;\n            display: flex;\n            flex-direction: row;\n            gap: 24px;\n        }\n        .VacancyCard__left-info-block{\n            display: flex;\n            gap: 12px;\n        }\n        .VacancyCard__left-info-block{\n            font-weight: 600;\n            font-size: 16px;\n            color: #6c757d;\n        }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

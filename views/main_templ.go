@@ -11,6 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import "mexxx1/golang-fullstack/views/components"
 import "mexxx1/golang-fullstack/views/layout"
 import "mexxx1/golang-fullstack/views/widgets"
+import "time"
 
 func Main() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -87,7 +88,15 @@ func Main() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = widgets.VacancyCard().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = widgets.VacancyCard(widgets.VacancyCardProps{
+				Role:        "Директор по продажам",
+				Location:    "Москва",
+				Salary:      "200 000 руб",
+				CompanyType: "Медиа",
+				CompanyName: "ООО Василий",
+				Email:       "",
+				Createdat:   time.Now(),
+			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

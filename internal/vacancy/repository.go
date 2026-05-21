@@ -22,6 +22,20 @@ func NewVacancyRepository(dbpool *pgxpool.Pool, logger *zerolog.Logger) *Vacancy
 	return &repo
 }
 
+func (r *VacancyRepository) getAll() ([]Vacancy, error) {
+	query := "SELECT * FROM vacancies"
+	rows, err := r.DbPool.Query(context.Background(), query)
+	if err != nil {
+		return nil, err
+	}
+	vacancies, err := pgx.CollectRows(rows, pgx.RowToStructByName[Vacancy])
+
+	if err != nil {
+		return nil, err
+	}
+	return vacancies, nil
+}
+
 func (r *VacancyRepository) AddVacancy(form VacancyCreateForm) error {
 	query := "INSERT INTO vacancies ( role ,companyType,location,companyName ,salary , email ) VALUES ( @role ,@companyType,@location,@companyName ,@salary , @email)"
 	args := pgx.NamedArgs{

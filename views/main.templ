@@ -3,6 +3,7 @@ package views
 import "mexxx1/golang-fullstack/views/components"
 import "mexxx1/golang-fullstack/views/layout"
 import "mexxx1/golang-fullstack/views/widgets"
+import "time"
 
 templ Main() {
 	@MainStyle()
@@ -16,7 +17,15 @@ templ Main() {
 				@components.SubTitle("Простой поиск работы")
 			}
 			@widgets.VacancyForm()
-			@widgets.VacancyCard()
+			@widgets.VacancyCard(widgets.VacancyCardProps{
+				Role:        "Директор по продажам",
+				Location:    "Москва",
+				Salary:      "200 000 руб",
+				CompanyType: "Медиа",
+				CompanyName: "ООО Василий",
+				Email:       "",
+				Createdat:   time.Now(),
+			})
 		</main>
 	}
 }

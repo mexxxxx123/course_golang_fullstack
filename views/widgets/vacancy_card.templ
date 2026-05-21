@@ -1,33 +1,49 @@
 package widgets
 
-templ VacancyCard() {
+import "mexxx1/golang-fullstack/views/components"
+
+import "time"
+
+type VacancyCardProps struct {
+	Role        string
+	Location    string
+	Salary      string
+	CompanyType string
+	CompanyName string
+	Email       string
+	Createdat   time.Time
+}
+
+templ VacancyCard(props VacancyCardProps) {
 	@VacancyCardStyle()
 	<div class="VacancyCard">
 		<div class="VacancyCard__left">
-			<div class="VacancyCard__left-time">10 минут назад </div>
+			<div class="VacancyCard__left-time">{ props.Createdat.String() } </div>
 			<div class="VacancyCard__left-hero">
-				<div class="VacancyCard__left-hero-logo">logo</div>
+				<img src="./public/pictures/vac_card_heroLogo.png" width="40px" height="40px"/>
 				<div class="VacancyCard__left-hero-text">
-					<div class="VacancyCard__left-hero-header">Директор по продажам</div>
-					<div class="VacancyCard__left-hero-headling">ООО Василий</div>
+					<div class="VacancyCard__left-hero-header">{ props.Role }</div>
+					<div class="VacancyCard__left-hero-headling">{ props.CompanyName }</div>
 				</div>
 			</div>
 			<div class="VacancyCard__left-info">
 				<div class="VacancyCard__left-info-block">
-					<div class="VacancyCard__left-info-type-logo">logo</div>
-					<div class="VacancyCard__left-info-block-text">Медиа</div>
+					<img src="./public/pictures/briefcase(2) 2.png"/>
+					<div class="VacancyCard__left-info-block-text">{ props.CompanyType }</div>
 				</div>
 				<div class="VacancyCard__left-info-block">
-					<div class="VacancyCard__left-info-salary-logo">logo</div>
-					<div class="VacancyCard__left-info-block-text">300 000 руб</div>
+					<img src="./public/pictures/g135.png"/>
+					<div class="VacancyCard__left-info-block-text">{ props.Salary }</div>
 				</div>
 				<div class="VacancyCard__left-info-block">
-					<div class="VacancyCard__left-info-location-logo">logo</div>
-					<div class="VacancyCard__left-info-block-text">Москва</div>
+					<img src="./public/pictures/map-pin.png"/>
+					<div class="VacancyCard__left-info-block-text">{ props.Location }</div>
 				</div>
 			</div>
 		</div>
-		<div class="VacancyCard__right"></div>
+		<div class="VacancyCard__right">
+			@components.Button("Откликнуться")
+		</div>
 	</div>
 }
 
@@ -42,29 +58,31 @@ templ VacancyCardStyle() {
             box-shadow: 0 3px 8px 0 rgba(48, 150, 137, 0.08);
             background: #fff;
             margin: 0 72px 24px 72px ;
+            align-items: center;
         } 
         .VacancyCard__left{
             display: flex;
             flex-direction: column;
         }
         .VacancyCard__left-time{
+            width: fit-content;
             background: rgba(48, 150, 137, 0.1);
             border-radius: 8px;
             padding: 8px;
-            width: 136px;
-            height: 28px;
             font-size: 16px;
             color: #309689;
+            margin-bottom: 24px;
         }
         .VacancyCard__left-hero{
             display: flex;
             flex-direction: row;
             gap: 20px;
+            align-items: center;
         }
         .VacancyCard__left-hero-text{
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 5px;
         }
         .VacancyCard__left-hero-header{
           font-weight: 600;
@@ -77,6 +95,7 @@ templ VacancyCardStyle() {
           color: #000;
         }
         .VacancyCard__left-info{
+            margin-top: 28px;
             display: flex;
             flex-direction: row;
             gap: 24px;
