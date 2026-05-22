@@ -31,7 +31,10 @@ func NewHandler(router fiber.Router, logger *zerolog.Logger, repo *VacancyReposi
 	vacGroup.Get("/", h.getAll)
 }
 func (h *VacancyFormHandler) getAll(c *fiber.Ctx) error {
-	vacancies, err := h.repo.getAll()
+	PAGE_ITEMS := 2
+	page := c.QueryInt("page", 1)
+
+	vacancies, err := h.repo.GetAll(PAGE_ITEMS, (page-1)*PAGE_ITEMS)
 	if err != nil {
 		h.logger.Error().Msg(err.Error())
 	}

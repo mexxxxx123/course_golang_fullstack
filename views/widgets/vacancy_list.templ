@@ -1,0 +1,96 @@
+package widgets
+
+import "mexxx1/golang-fullstack/views/components"
+
+import "mexxx1/golang-fullstack/internal/vacancy"
+import "fmt"
+
+templ VacancyList(vacancies []vacancy.Vacancy, pageCount, page int) {
+	@VacancyListStyle()
+	<div class="VacancyList">
+		<div class="VacancyList__header">
+			<div class="VacancyList__mainText">Последние вакансии</div>
+			<div class="VacancyList__subText">Найдите подходящую вакансию за пару минут!</div>
+		</div>
+		<div class="VacancyList__cards">
+			for key, _ := range vacancies {
+				@components.VacancyCard(components.VacancyCardProps{
+					Role:        vacancies[key].Role,
+					Location:    vacancies[key].Location,
+					Salary:      vacancies[key].Salary,
+					CompanyType: vacancies[key].CompanyType,
+					CompanyName: vacancies[key].CompanyName,
+					Email:       vacancies[key].Email,
+					Createdat:   vacancies[key].Createdat,
+				})
+			}
+		</div>
+		<div class="VacancyList-buttons">
+			<div class="VacancyList-button">
+				if page != 1 {
+					<a href={ templ.SafeURL(fmt.Sprintf("/?page=%d", page-1)) } class="VacancyList-link">
+						<img src="/public/pictures/svg/left-arrow.svg"/>
+						<span class="button-text">Предыдущая</span>
+					</a>
+				}
+			</div>
+			<div class="VacancyList-button">
+				if page != pageCount {
+					<a href={ templ.SafeURL(fmt.Sprintf("/?page=%d", page+1)) } class="VacancyList-link">
+						<span class="button-text">Следующая</span>
+						<img src="/public/pictures/svg/rigth-arrow.svg"/>
+					</a>
+				}
+			</div>
+		</div>
+	</div>
+}
+
+templ VacancyListStyle() {
+	<style>
+    .VacancyList{
+        padding: 60px 72px;
+    }
+    .VacancyList__mainText{
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 134%;
+    }
+    .VacancyList__subText{
+    
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 131%;
+    }
+    .VacancyList__header{
+        display: flex;
+        flex-direction: column;
+        gap: 20px ;
+        margin-bottom: 60px;
+    }
+    .VacancyList__cards{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .button-text{
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 115%;
+    color: #6c757d;
+    }
+    .VacancyList-buttons{
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .VacancyList-link{
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    </style>
+}

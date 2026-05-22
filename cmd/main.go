@@ -41,7 +41,7 @@ func main() {
 
 	//Handler`s
 
-	home.NewHandler(app, logger)
+	home.NewHandler(app, logger, VacancyRepo)
 	vacancy.NewHandler(app, logger, VacancyRepo)
 
 	app.Listen(":3001")

@@ -1,8 +1,7 @@
-package widgets
-
-import "mexxx1/golang-fullstack/views/components"
+package components
 
 import "time"
+import "github.com/rvflash/elapsed"
 
 type VacancyCardProps struct {
 	Role        string
@@ -15,10 +14,11 @@ type VacancyCardProps struct {
 }
 
 templ VacancyCard(props VacancyCardProps) {
+	{{ date := elapsed.LocalTime(props.Createdat, "ru") }}
 	@VacancyCardStyle()
 	<div class="VacancyCard">
 		<div class="VacancyCard__left">
-			<div class="VacancyCard__left-time">{ props.Createdat.String() } </div>
+			<div class="VacancyCard__left-time">{ date } </div>
 			<div class="VacancyCard__left-hero">
 				<img src="./public/pictures/vac_card_heroLogo.png" width="40px" height="40px"/>
 				<div class="VacancyCard__left-hero-text">
@@ -42,7 +42,7 @@ templ VacancyCard(props VacancyCardProps) {
 			</div>
 		</div>
 		<div class="VacancyCard__right">
-			@components.Button("Откликнуться")
+			@Button("Откликнуться")
 		</div>
 	</div>
 }
@@ -55,9 +55,8 @@ templ VacancyCardStyle() {
             justify-content: space-between;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 3px 8px 0 rgba(48, 150, 137, 0.08);
+            box-shadow: 16px 16px 16px 16px rgba(28, 90, 82, 0.08);
             background: #fff;
-            margin: 0 72px 24px 72px ;
             align-items: center;
         } 
         .VacancyCard__left{

@@ -22,9 +22,20 @@ func NewVacancyRepository(dbpool *pgxpool.Pool, logger *zerolog.Logger) *Vacancy
 	return &repo
 }
 
-func (r *VacancyRepository) getAll() ([]Vacancy, error) {
-	query := "SELECT * FROM vacancies"
-	rows, err := r.DbPool.Query(context.Background(), query)
+func (r *VacancyRepository) CountAll() int {
+	query := "SELECT count(*) FROM vacancies"
+	var count int
+	r.DbPool.QueryRow(context.Background(), query).Scan(&count)
+	return count
+}
+
+func (r *VacancyRepository) GetAll(limit, offset int) ([]Vacancy, error) {
+	query := "SELECT * FROM vacancies ORDER BY createdat LIMIT @limit OFFSET @offset"
+	args := pgx.NamedArgs{
+		"limit":  limit,
+		"offset": offset,
+	}
+	rows, err := r.DbPool.Query(context.Background(), query, args)
 	if err != nil {
 		return nil, err
 	}
