@@ -11,6 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 func headerClass() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background`, "#222222")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`padding-bottom`, "75px")))
 	templ_7745c5c3_CSSID := templ.CSSID(`headerClass`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,

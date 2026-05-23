@@ -5,12 +5,12 @@ import "mexxx1/golang-fullstack/views/components"
 templ Menu() {
 	@MenuStyle()
 	<div class="menu">
-		<div class="menu__left">
+		<a href="/" class="menu__left">
 			<img src="./public/pictures/check.png"/>
 			<div class="menu__left-text">Моя работа</div>
-		</div>
+		</a>
 		<div class="menu__right">
-			<div class="menu__right-link">Войти</div>
+			<a class="menu__right-link" href="/login">Войти</a>
 			@components.Button("Зарегистрироваться")
 		</div>
 	</div>
@@ -21,7 +21,7 @@ templ MenuStyle() {
         .menu{
             display: flex;
             justify-content: space-between;
-            padding: 20px 70px;
+            padding: 20px 70px 50px 70px;
         }  
         .menu__left{
             display: flex;
@@ -40,6 +40,10 @@ templ MenuStyle() {
             text-decoration: none;
             color: white;
             font-size: 16px;
+        }
+        .menu__right-link{
+            text-decoration: none;
+            color: white;
         }
         
     </style>

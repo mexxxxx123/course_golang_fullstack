@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/fiber/v2/middleware/session"
 )
 
 func main() {
@@ -35,13 +36,16 @@ func main() {
 	dbpool := database.CreateDbPool(dbConf, logger)
 	defer dbpool.Close()
 
+	//store ssesion`s
+	store := session.New()
+
 	//Repo`s
 
 	VacancyRepo := vacancy.NewVacancyRepository(dbpool, logger)
 
 	//Handler`s
 
-	home.NewHandler(app, logger, VacancyRepo)
+	home.NewHandler(app, logger, VacancyRepo, store)
 	vacancy.NewHandler(app, logger, VacancyRepo)
 
 	app.Listen(":3001")
