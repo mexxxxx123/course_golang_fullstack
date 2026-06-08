@@ -5,8 +5,12 @@ import (
 	"mexxx1/golang-fullstack/internal/vacancy"
 	"mexxx1/golang-fullstack/pkg/logger/tadapter"
 	"mexxx1/golang-fullstack/views"
+	"mexxx1/golang-fullstack/views/components"
 	"net/http"
 
+	"github.com/a-h/templ"
+	"github.com/gobuffalo/validate"
+	"github.com/gobuffalo/validate/validators"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
 
@@ -29,7 +33,8 @@ func NewHandler(router fiber.Router, logger *zerolog.Logger, repo *vacancy.Vacan
 	}
 	router.Get("/", h.home)
 	router.Get("/error", h.error)
-	router.Get("/login", h.login)
+	router.Get("/loginPage", h.loginPage)
+	router.Post("/login", h.login)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {
@@ -64,7 +69,7 @@ func (h *HomeHandler) home(c *fiber.Ctx) error {
 	return tadapter.Render(c, component, http.StatusOK)
 }
 
-func (h *HomeHandler) login(c *fiber.Ctx) error {
+func (h *HomeHandler) loginPage(c *fiber.Ctx) error {
 	component := views.Login()
 	sess, err := h.store.Get(c)
 	if err != nil {
@@ -76,4 +81,55 @@ func (h *HomeHandler) login(c *fiber.Ctx) error {
 	}
 	return tadapter.Render(c, component, http.StatusOK)
 
+}
+
+func (h *HomeHandler) login(c *fiber.Ctx) error {
+	form := SessionInfo{
+		Email:    c.FormValue("LoginEmail"),
+		Password: c.FormValue("LoginPassword"),
+	}
+
+	errors := validate.Validate(
+		&validators.EmailIsPresent{
+			Name:    "LoginEmail",
+			Field:   form.Email,
+			Message: "Не задан или введен неверно Email",
+		},
+		&validators.StringIsPresent{
+			Name:    "LoginPassword",
+			Field:   form.Password,
+			Message: "Не задан пароль",
+		},
+	)
+	var component templ.Component
+	if len(errors.Errors) > 0 {
+		for key, value := range errors.Errors {
+			for value1 := range value {
+				h.logger.Error().Msg(errors.Errors[key][value1])
+			}
+		}
+		component = components.Notification("Ошибка на сервере, попробуйте позднее", components.NotificationFail)
+		h.logger.Error().Msg("1123")
+		return tadapter.Render(c, component, http.StatusBadRequest)
+	}
+	sess, err := h.store.Get(c)
+	if err != nil {
+		panic(err)
+	}
+
+	sess.Set("email", form.Email)
+	sess.Set("password", form.Password)
+
+	if name, ok := sess.Get("password").(string); ok {
+		h.logger.Info().Msg(name)
+	}
+	if name, ok := sess.Get("email").(string); ok {
+		h.logger.Info().Msg(name)
+	}
+
+	if err := sess.Save(); err != nil {
+		panic(err)
+	}
+	component = components.Notification("Логин выполнен", components.NotificationSuccess)
+	return tadapter.Render(c, component, http.StatusOK)
 }

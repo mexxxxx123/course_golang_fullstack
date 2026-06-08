@@ -3,6 +3,7 @@ package views
 
 import "mexxx1/golang-fullstack/views/layout"
 import "mexxx1/golang-fullstack/views/components"
+import "mexxx1/golang-fullstack/views/widgets"
 
 templ Login() {
 	@LoginStyle()
@@ -12,8 +13,11 @@ templ Login() {
 	}) {
 		<main>
 			@layout.Header() {
-				@components.Title("Войти на сайт")
-				@components.SubTitle("Войдите под своей учётной записью")
+				<div class="LoginPage">
+					@components.Title("Войти на сайт")
+					@components.SubTitle("Войдите под своей учётной записью")
+					@widgets.LoginForm()
+				</div>
 			}
 		</main>
 	}
@@ -21,8 +25,14 @@ templ Login() {
 
 templ LoginStyle() {
 	<style>
-	.body{
+	.LoginPage{
+		display: flex;
+		flex-direction: column;
+		align-items: center ;
+	}
+	body{
 		box-sizing: border-box;
+		background: #222222;
 	}				
 	</style>
 }
