@@ -35,6 +35,7 @@ func NewHandler(router fiber.Router, logger *zerolog.Logger, repo *vacancy.Vacan
 	router.Get("/error", h.error)
 	router.Get("/loginPage", h.loginPage)
 	router.Post("/login", h.login)
+	router.Post("/logout", h.logout)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {
@@ -56,13 +57,21 @@ func (h *HomeHandler) home(c *fiber.Ctx) error {
 		h.logger.Error().Msg(err.Error())
 		return c.SendStatus(500)
 	}
+
+	// Ssesion
+
 	sses, err := h.store.Get(c)
 	if err != nil {
 		panic(err)
 	}
-	if name, ok := sses.Get("name").(string); ok {
-		h.logger.Info().Msg(name)
+	userEmail := ""
+	if email, ok := sses.Get("email").(string); ok {
+		userEmail = email
 	}
+	c.Locals("email", userEmail)
+
+	//
+
 	count := h.repository.CountAll()
 
 	component := views.Main(vacancies, int(math.Ceil(float64(count)/float64(PAGE_ITEMS))), page)
@@ -70,17 +79,17 @@ func (h *HomeHandler) home(c *fiber.Ctx) error {
 }
 
 func (h *HomeHandler) loginPage(c *fiber.Ctx) error {
-	component := views.Login()
-	sess, err := h.store.Get(c)
+	sses, err := h.store.Get(c)
 	if err != nil {
 		panic(err)
 	}
-	sess.Set("name", "Anton")
-	if err := sess.Save(); err != nil {
-		panic(err)
+	userEmail := ""
+	if email, ok := sses.Get("email").(string); ok {
+		userEmail = email
 	}
+	c.Locals("email", userEmail)
+	component := views.Login()
 	return tadapter.Render(c, component, http.StatusOK)
-
 }
 
 func (h *HomeHandler) login(c *fiber.Ctx) error {
@@ -108,8 +117,7 @@ func (h *HomeHandler) login(c *fiber.Ctx) error {
 				h.logger.Error().Msg(errors.Errors[key][value1])
 			}
 		}
-		component = components.Notification("Ошибка на сервере, попробуйте позднее", components.NotificationFail)
-		h.logger.Error().Msg("1123")
+		component = components.Notification("Введены некорректные данные", components.NotificationFail)
 		return tadapter.Render(c, component, http.StatusBadRequest)
 	}
 	sess, err := h.store.Get(c)
@@ -130,6 +138,30 @@ func (h *HomeHandler) login(c *fiber.Ctx) error {
 	if err := sess.Save(); err != nil {
 		panic(err)
 	}
+
+	if form.Email == "a@a.ru" && form.Password == "1" {
+		c.Response().Header.Add("Hx-Redirect", "/")
+		return c.Redirect("/", http.StatusOK)
+	}
+
 	component = components.Notification("Логин выполнен", components.NotificationSuccess)
 	return tadapter.Render(c, component, http.StatusOK)
+}
+
+func (h *HomeHandler) logout(c *fiber.Ctx) error {
+	sess, err := h.store.Get(c)
+
+	if err != nil {
+		panic(err)
+	}
+
+	sess.Delete("email")
+	sess.Delete("password")
+
+	if err := sess.Save(); err != nil {
+		panic(err)
+	}
+
+	c.Response().Header.Add("Hx-Redirect", "/loginPage")
+	return c.Redirect("/loginPage", http.StatusOK)
 }

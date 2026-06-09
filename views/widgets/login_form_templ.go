@@ -35,7 +35,7 @@ func LoginForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"login-result\"></div><form class=\"LoginForm\" hx-post=\"/getEmail\" hx-trigger=\"submit\" hx-target=\"#login-result\" hx-target-error=\"#login-result\" hx-swap=\"innerHTML swap:1s\" hx-on--after-request=\"if(event.detail.successful) this.reset()\"><div class=\"LoginInput\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"LoginForm_wrapper\" hx-ext=\"response-targets\"><div id=\"login-result\"></div><form class=\"LoginForm\" hx-post=\"/login\" hx-trigger=\"submit\" hx-target=\"#login-result\" hx-target-error=\"#login-result\" hx-swap=\"innerHTML swap:1s\" hx-on--after-request=\"if(event.detail.successful) this.reset()\"><div class=\"LoginInput\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -53,6 +53,7 @@ func LoginForm() templ.Component {
 		templ_7745c5c3_Err = components.Input(components.InputData{
 			Name:        "LoginPassword",
 			Placeholder: "Пароль",
+			Type:        "password",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -65,7 +66,7 @@ func LoginForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -94,7 +95,7 @@ func LoginFormStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n        .LoginInput{\n            width: 100%;\n        }\n        .LoginForm{\n            display: flex;\n            flex-direction: column;\n            margin-top: 12px;\n            gap: 30px;\n            max-width: 435px;\n            width: 100%;\n            align-items: center;\n        }\n        .LoginFormButton{\n            width: 50%;\n\n        }\n\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n        .LoginInput{\n            width: 100%;\n        }\n        .LoginForm{\n            display: flex;\n            flex-direction: column;\n            gap: 30px;\n            max-width: 435px;\n            width: 100%;\n            align-items: center;\n\t\t\tjustify-content: center;\n        }\n        .LoginFormButton{\n            width: 50%;\n\n        }\n\t\t.LoginForm_wrapper{\n\t\t\twidth: 100%;\n            margin-top: 35px;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tflex-direction: column;\n\t\t\tgap: 30px;\n\t\t\talign-items: center;\n\t\t}\n\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

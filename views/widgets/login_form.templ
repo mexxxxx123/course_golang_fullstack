@@ -4,32 +4,35 @@ import "mexxx1/golang-fullstack/views/components"
 
 templ LoginForm() {
 	@LoginFormStyle()
-	<div id="login-result"></div>
-	<form
-		class="LoginForm"
-		hx-post="/getEmail"
-		hx-trigger="submit"
-		hx-target="#login-result"
-		hx-target-error="#login-result"
-		hx-swap="innerHTML swap:1s"
-		hx-on--after-request="if(event.detail.successful) this.reset()"
-	>
-		<div class="LoginInput">
-			@components.Input(components.InputData{
-				Name:        "LoginEmail",
-				Placeholder: "Email",
-			})
-		</div>
-		<div class="LoginInput">
-			@components.Input(components.InputData{
-				Name:        "LoginPassword",
-				Placeholder: "Пароль",
-			})
-		</div>
-		<div class="LoginFormButton">
-			@components.Button("Войти на сайт")
-		</div>
-	</form>
+	<div class="LoginForm_wrapper" hx-ext="response-targets">
+		<div id="login-result"></div>
+		<form
+			class="LoginForm"
+			hx-post="/login"
+			hx-trigger="submit"
+			hx-target="#login-result"
+			hx-target-error="#login-result"
+			hx-swap="innerHTML swap:1s"
+			hx-on--after-request="if(event.detail.successful) this.reset()"
+		>
+			<div class="LoginInput">
+				@components.Input(components.InputData{
+					Name:        "LoginEmail",
+					Placeholder: "Email",
+				})
+			</div>
+			<div class="LoginInput">
+				@components.Input(components.InputData{
+					Name:        "LoginPassword",
+					Placeholder: "Пароль",
+					Type:        "password",
+				})
+			</div>
+			<div class="LoginFormButton">
+				@components.Button("Войти на сайт")
+			</div>
+		</form>
+	</div>
 }
 
 templ LoginFormStyle() {
@@ -40,16 +43,25 @@ templ LoginFormStyle() {
         .LoginForm{
             display: flex;
             flex-direction: column;
-            margin-top: 12px;
             gap: 30px;
             max-width: 435px;
             width: 100%;
             align-items: center;
+			justify-content: center;
         }
         .LoginFormButton{
             width: 50%;
 
         }
+		.LoginForm_wrapper{
+			width: 100%;
+            margin-top: 35px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			gap: 30px;
+			align-items: center;
+		}
 
     </style>
 }

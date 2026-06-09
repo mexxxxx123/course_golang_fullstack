@@ -75,7 +75,7 @@ func ButtonStyle() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<style>\n        \n.button{\n\tfont-weight: 400;\n\tfont-size: 18px;\n\tline-height: 120%;\n\ttext-align: center;\n\tfont-style: normal;\n\tbackground: none;\n\tborder: none;\n\tpadding: 14px 20px;\n\tcursor: pointer;\n\tcolor: #fff;\n\tbackground: #309689;\n\tborder-radius: 8px;\n}\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<style>\n        \n.button{\n\tfont-weight: 400;\n\tfont-size: 18px;\n\tline-height: 120%;\n\ttext-align: center;\n\tfont-style: normal;\n\tbackground: none;\n\tborder: none;\n\tpadding: 14px 20px;\n\tcursor: pointer;\n\tcolor: #fff;\n\tbackground: #309689;\n\tborder-radius: 8px;\n\twidth: 100%;\n}\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -10,7 +10,20 @@ templ Menu() {
 			<div class="menu__left-text">Моя работа</div>
 		</a>
 		<div class="menu__right">
-			<a class="menu__right-link" href="/login">Войти</a>
+			{{ email := ctx.Value("email").(string) }}
+			if email == "" {
+				<a class="menu__right-link" href="/loginPage">Войти</a>
+			} else {
+				<span>{ email }</span>
+				<a
+					hx-post="/logout"
+					hx-trigger="click"
+					hx-swap="innerHTML swap:1s"
+					class="menu__right-link"
+				>
+					Выйти
+				</a>
+			}
 			@components.Button("Зарегистрироваться")
 		</div>
 	</div>

@@ -35,15 +35,40 @@ func Menu() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"menu\"><a href=\"/\" class=\"menu__left\"><img src=\"./public/pictures/check.png\"><div class=\"menu__left-text\">Моя работа</div></a><div class=\"menu__right\"><a class=\"menu__right-link\" href=\"/login\">Войти</a>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"menu\"><a href=\"/\" class=\"menu__left\"><img src=\"./public/pictures/check.png\"><div class=\"menu__left-text\">Моя работа</div></a><div class=\"menu__right\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
+		}
+		email := ctx.Value("email").(string)
+		if email == "" {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<a class=\"menu__right-link\" href=\"/loginPage\">Войти</a>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var2 string
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(email)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layout/menu.templ`, Line: 17, Col: 17}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</span> <a hx-post=\"/logout\" hx-trigger=\"click\" hx-swap=\"innerHTML swap:1s\" class=\"menu__right-link\">Выйти</a>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		templ_7745c5c3_Err = components.Button("Зарегистрироваться").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -67,12 +92,12 @@ func MenuStyle() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var2 == nil {
-			templ_7745c5c3_Var2 = templ.NopComponent
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<style>\n        .menu{\n            display: flex;\n            justify-content: space-between;\n            padding: 20px 70px 50px 70px;\n        }  \n        .menu__left{\n            display: flex;\n            gap: 12px;\n            align-items: center;\n            cursor:pointer ;\n            text-decoration: none;\n            color: white;\n            font-size: 16px;\n        }\n        .menu__right{\n            display: flex;\n            gap: 12px;\n            align-items: center;\n            cursor:pointer ;\n            text-decoration: none;\n            color: white;\n            font-size: 16px;\n        }\n        .menu__right-link{\n            text-decoration: none;\n            color: white;\n        }\n        \n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n        .menu{\n            display: flex;\n            justify-content: space-between;\n            padding: 20px 70px 50px 70px;\n        }  \n        .menu__left{\n            display: flex;\n            gap: 12px;\n            align-items: center;\n            cursor:pointer ;\n            text-decoration: none;\n            color: white;\n            font-size: 16px;\n        }\n        .menu__right{\n            display: flex;\n            gap: 12px;\n            align-items: center;\n            cursor:pointer ;\n            text-decoration: none;\n            color: white;\n            font-size: 16px;\n        }\n        .menu__right-link{\n            text-decoration: none;\n            color: white;\n        }\n        \n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -3,11 +3,12 @@ package components
 type InputData struct {
 	Name        string
 	Placeholder string
+	Type        string
 }
 
 templ Input(props InputData) {
 	@InputStyle()
-	<input class="input" name={ props.Name } placeholder={ props.Placeholder }/>
+	<input class="input" name={ props.Name } placeholder={ props.Placeholder } type={ props.Type }/>
 }
 
 templ InputStyle() {
